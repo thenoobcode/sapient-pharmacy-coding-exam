@@ -1,0 +1,34 @@
+<div class="flex flex-column">
+    <div class="d-flex">
+        <input #searchRef type="search" 
+        class="form-control"
+        placeholder="Search Medicines" 
+        (keyup)="searchMedicines(searchRef.value)">
+        <button type="button" class="btn btn-info flex-shrink-0"
+        [routerLink]="['add']">Add Medicine</button>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr><th *ngFor="let column of gridHeaders">{{column.title}}</th></tr>
+        </thead>
+    
+        <tbody *ngIf="filteredMedicines?.length>0">
+            <!-- <ng-container  *ngIf="!$any(medicine).hide">
+                
+            </ng-container> -->
+            <tr *ngFor="let medicine of filteredMedicines; trackBy:trackByMedicineName"
+            [ngClass]="{'bg-danger': expiredMedicine(medicine), 'bg-warning': medicine.quantity<10}"
+            (click)="showDetails(medicine.name)">
+                <td *ngFor="let column of gridHeaders">{{$any(medicine)[column.field]}}</td>
+            </tr>
+            
+        </tbody>
+    
+        <tfoot *ngIf="!filteredMedicines || filteredMedicines.length===0">
+            <tr>
+                <td [attr.colspan]="gridHeaders?.length">No Data Found</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+

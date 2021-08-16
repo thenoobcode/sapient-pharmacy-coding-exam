@@ -1,0 +1,47 @@
+<div class="d-flex align-items-center h-100">
+    <form class="border p-4 mx-auto col-12 col-md-6 col-lg-4" 
+    (keydown.enter)="$event.preventDefault()"
+    [formGroup]="medicineForm">
+        <div class="form-group">
+            <label for="medicineName">Medicine Name:</label>
+            <input type="text" formControlName="name"
+            class="form-control" id="medicineName">
+            <small class="is-invalid">Medicine name is required.</small>
+          </div>
+          <div class="form-group">
+            <label for="brand">Brand Name:</label>
+            <input type="text" formControlName="brand" 
+            class="form-control" id="brand">
+            <small class="is-invalid">Brand name is required.</small>
+          </div>
+          <div class="form-group">
+            <label for="price">Price (in $):</label>
+            <input type="number" formControlName="price" 
+            class="form-control" id="price">
+            <small class="is-invalid">Price is required.</small>
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" formControlName="quantity" 
+            class="form-control" id="quantity">
+            <small class="is-invalid">Quantity is required.</small>
+          </div>
+          <div class="form-group">
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="date" formControlName="expiryDate" 
+            class="form-control" id="expiryDate">
+            <small *ngIf="medicineForm.get('expiryDate')?.errors?.required" 
+            class="is-invalid">Expiry Date is required.</small>
+            <small *ngIf="medicineForm.get('expiryDate')?.errors?.minExpiryDate" 
+            class="is-invalid">Expiry Date must be greater than 15 days.</small>
+          </div>
+          <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea id="notes" formControlName="notes"
+            class="form-control"></textarea> 
+          </div>
+          <button type="submit" [disabled]="medicineForm.invalid"
+          (click)="addMedicine()"
+          class="btn btn-primary btn-block">Submit</button>
+    </form>
+</div>

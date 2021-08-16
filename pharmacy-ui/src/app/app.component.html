@@ -1,0 +1,11 @@
+<div class="d-flex flex-column h-100">
+    <nav class="p-2 bg-dark align-items-center">
+        <a *ngIf="previousURL" [routerLink]="previousURL" class="back text-white">
+            <span class="material-icons">arrow_back</span>
+        </a>
+        <a class="navbar-brand ml-3 text-white" href="javascript:void(0)">{{menuTitle}}</a>
+    </nav>
+    <div class="flex-grow-1 mt-3 px-2 px-md-4">
+        <router-outlet></router-outlet>
+    </div>
+</div>
